@@ -25,7 +25,7 @@ class _ExamStartState extends State<ExamStart> {
           Container(
           width: _width,
           height:30,
-          color: const Color.fromARGB(221, 94, 90, 90),
+          color: Color.fromARGB(221, 99, 94, 94),
           child: Row(
             children: const[
               SizedBox(width: 20,),
