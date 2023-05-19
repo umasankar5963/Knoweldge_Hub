@@ -56,7 +56,7 @@ class _ExamStartState extends State<ExamStart> {
             child: Container(
               height: 8,
               width: 8,
-              color: Colors.blue,
+              color: Color.fromARGB(255, 47, 143, 221),
               //child: Center(child: Text("TriangleClipper()")),
             ),
           ),],),
