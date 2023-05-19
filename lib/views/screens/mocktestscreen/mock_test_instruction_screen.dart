@@ -266,8 +266,7 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                      ),
                      ),
                  );
-               }).toList(),
-                    
+               }).toList(),     
                 )],),
             
                  const Text('Please note all questions will appear in your default language can be change on particular question later on ',style: TextStyle(color:Colors.red),),
