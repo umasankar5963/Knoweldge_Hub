@@ -1,18 +1,36 @@
-2023/05/19-12:21:34.955 3003 Reusing MANIFEST /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.u2EvjK/flutter_tools_chrome_device.cWWCju/Default/Local Storage/leveldb/MANIFEST-000001
-2023/05/19-12:21:34.958 3003 Recovering log #33
-2023/05/19-12:21:34.959 3003 Reusing old log /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.u2EvjK/flutter_tools_chrome_device.cWWCju/Default/Local Storage/leveldb/000033.log 
-2023/05/19-12:21:34.961 3003 Delete type=0 #4
-2023/05/19-12:21:34.961 3003 Delete type=0 #14
-2023/05/19-12:21:34.961 3003 Delete type=0 #28
-2023/05/19-12:21:34.962 3003 Delete type=0 #3
-2023/05/19-12:21:34.962 3003 Delete type=2 #15
-2023/05/19-12:21:34.963 3003 Delete type=2 #13
-2023/05/19-12:21:34.963 3003 Delete type=2 #10
-2023/05/19-12:21:34.963 3003 Delete type=2 #8
-2023/05/19-12:21:34.963 3003 Delete type=2 #21
-2023/05/19-12:21:34.963 3003 Delete type=2 #26
-2023/05/19-12:21:34.963 3003 Delete type=2 #19
-2023/05/19-12:21:34.963 3003 Delete type=2 #24
-2023/05/19-12:21:34.964 3003 Delete type=0 #25
-2023/05/19-12:21:34.964 3003 Delete type=0 #20
-2023/05/19-12:21:34.964 3003 Delete type=0 #9
+2023/05/22-14:37:16.020 5203 Reusing MANIFEST /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.K0INt1/flutter_tools_chrome_device.IKfFtJ/Default/Local Storage/leveldb/MANIFEST-000001
+2023/05/22-14:37:16.024 5203 Recovering log #33
+2023/05/22-14:37:16.025 5203 Reusing old log /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.K0INt1/flutter_tools_chrome_device.IKfFtJ/Default/Local Storage/leveldb/000033.log 
+2023/05/22-14:37:16.027 5203 Delete type=0 #4
+2023/05/22-14:37:16.027 5203 Delete type=0 #14
+2023/05/22-14:37:16.028 5203 Delete type=0 #28
+2023/05/22-14:37:16.028 5203 Delete type=0 #3
+2023/05/22-14:37:16.028 5203 Delete type=2 #15
+2023/05/22-14:37:16.028 5203 Delete type=2 #13
+2023/05/22-14:37:16.028 5203 Delete type=2 #10
+2023/05/22-14:37:16.029 5203 Delete type=2 #8
+2023/05/22-14:37:16.029 5203 Delete type=2 #21
+2023/05/22-14:37:16.030 5203 Delete type=2 #26
+2023/05/22-14:37:16.031 5203 Delete type=2 #19
+2023/05/22-14:37:16.031 5203 Delete type=2 #24
+2023/05/22-14:37:16.031 5203 Delete type=0 #25
+2023/05/22-14:37:16.032 5203 Delete type=0 #20
+2023/05/22-14:37:16.032 5203 Delete type=0 #9
+2023/05/22-15:22:22.623 2f03 Level-0 table #36: started
+2023/05/22-15:22:22.905 2f03 Level-0 table #36: 75497 bytes OK
+2023/05/22-15:22:23.209 2f03 Delete type=0 #33
+2023/05/22-16:07:42.404 2f03 Level-0 table #38: started
+2023/05/22-16:07:42.411 2f03 Level-0 table #38: 96185 bytes OK
+2023/05/22-16:07:42.417 2f03 Delete type=0 #35
+2023/05/22-16:12:43.658 2f03 Level-0 table #40: started
+2023/05/22-16:12:43.663 2f03 Level-0 table #40: 65131 bytes OK
+2023/05/22-16:12:43.669 2f03 Delete type=0 #37
+2023/05/22-16:12:43.673 2f03 Compacting 4@0 + 1@1 files
+2023/05/22-16:12:43.682 2f03 Generated table #41@0: 89 keys, 61489 bytes
+2023/05/22-16:12:43.682 2f03 Compacted 4@0 + 1@1 files => 61489 bytes
+2023/05/22-16:12:43.686 2f03 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/05/22-16:12:43.688 2f03 Delete type=2 #38
+2023/05/22-16:12:43.688 2f03 Delete type=2 #36
+2023/05/22-16:12:43.688 2f03 Delete type=2 #32
+2023/05/22-16:12:43.688 2f03 Delete type=2 #30
+2023/05/22-16:12:43.688 2f03 Delete type=2 #40
