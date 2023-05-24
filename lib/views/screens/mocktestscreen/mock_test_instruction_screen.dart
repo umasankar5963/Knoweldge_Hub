@@ -1,16 +1,10 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:login/views/screens/mocktestscreen/exam_screen.dart';
 import 'package:provider/provider.dart';
 
 
 class  InstructionsLanguage extends ChangeNotifier{
-  
-  //  List <String> instructionsEnglishPage=[
-  //   'assets/examInstructions/instructions1.png'
-  //  'assets/examInstructions/instructions2.png'
-  // ];
    String _selectedLanguage ='English';
    String  _imagePathScreen1="assets/examInstructions/instructions1.png"; 
    String  _imagePathScreen2='assets/examInstructions/instructions3.png';  
@@ -146,7 +140,7 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
                           color: hoveredIndex == value ? Colors.blue : null,
                         border: Border.all(color: Colors.black,)),
                     child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const[Text("Next",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),), Icon(Icons.arrow_forward_ios_rounded,size: 15,),],),),
+                    children: [Text("Next",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: hoveredIndex!=null?Colors.white:Colors.black),), Icon(Icons.arrow_forward_ios_rounded,size: 15,color: hoveredIndex!=null?Colors.white:Colors.black,),],),),
                 ),
            ),],),
            ),
@@ -224,8 +218,7 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                        borderRadius: const BorderRadius.all(Radius.circular(5)),
                         value: language.selectedLanguage,
                          onChanged: (newValue){
-                          language.setSelectionLanguage(newValue!);
-                         },
+                          language.setSelectionLanguage(newValue!);},
                        items:<String>['English','Telugu'].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                          alignment: Alignment.center,
@@ -255,26 +248,22 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                  value: dropdowndefaltValue,
                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   items: _languages.map((String language) {
-                 return DropdownMenuItem(
+              return DropdownMenuItem(
                    value: language,
                    child: Padding(
                      padding:  const EdgeInsets.only(left:3),
                      child: Row(
                        children: [
-                         Text(language),
-                       ],
-                     ),
-                     ),
-                 );
+                         Text(language),],),),);
                }).toList(),     
                 )],),
             
-                 const Text('Please note all questions will appear in your default language can be change on particular question later on ',style: TextStyle(color:Colors.red),),
+               const Text('Please note all questions will appear in your default language can be change on particular question later on ',style: TextStyle(color:Colors.red),),
                const Padding(padding: EdgeInsets.only(top: 20)),
                Row(children: [
                  Checkbox(
                  value:select,
-                onChanged:(bool?value){
+                 onChanged:(bool?value){
                    setState(() {
                      select=value!;
                      if(value){
@@ -284,8 +273,7 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                        //alertText='Please select default language to proceed further';
                       alertText='Please accept terms and conditions before proceedings';
                      }
-                   });
-                    
+                   });  
                  },checkColor: Colors.white,activeColor: Colors.blue,),
                  const Flexible(child: Text('i have read and understood the instructions.All computer hardware allotted to me are in proper working condition.i declare that iam not in possession of/not wearing/not carring any prophibited gadget like mobile phone ,bluetooth devices etc./any prophibited material with me into the examination hall.i agree that in case of not adherinng to the instructions,i shall beilable to be debbared from this test/and or to disclipnary action,which may include ban from future Tests/Examinations')),
                ],),
@@ -293,7 +281,7 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                 Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        children: [
-                   GestureDetector(
+                   InkWell(
                          onTap: (){Navigator.pop(context,);},
                     child: MouseRegion(
                        onEnter: (_){
@@ -312,12 +300,12 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                            decoration: BoxDecoration(border: Border.all(color: Colors.black),
                            color: onhoveredIndex != null?Colors.blue:null,),
                         child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                           children: const[
-                             Icon(Icons.arrow_back_ios_rounded,size: 15,),
-                             Text("Previous",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15))],)),
+                           children: [
+                             Icon(Icons.arrow_back_ios_rounded,size: 15,color: onhoveredIndex!=null?Colors.white:Colors.black,),
+                             Text("Previous",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15,color:onhoveredIndex!=null?Colors.white:Colors.black))],)),
                     ),),
             
-                  GestureDetector(
+                  InkWell(
                       onTap: (){
                        if (dropdowndefaltValue!= null && select) {
                    _navigateToNextPage();
@@ -342,12 +330,23 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                            
                            ),
                         child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                           children: const[
+                           children: [
                              Padding(
-                               padding: EdgeInsets.all(5),
-                               child: Center(child: Text("I am ready to begin",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color: Colors.white),))),
+                               padding: const EdgeInsets.all(5),
+                               child: Center(child: Text("I am ready to begin",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color:testButtonOnohever!=null? Colors.white:Colors.black),))),
                          ])),
                     )),
+                //   OnOhoverCustomWidget( 
+                //   onTap: (){
+                //        if (dropdowndefaltValue!= null && select) {
+                //    _navigateToNextPage();
+                //    } else {
+                //    alertdailugeBox(context);
+                //    }
+                //       },
+                //  text: "I am ready to begin",
+                //  style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color: Colors.white)),
+
                    const SizedBox(),
                       ],), 
                 const SizedBox(height: 40,)
