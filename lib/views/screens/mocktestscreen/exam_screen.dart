@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:login/commons/colorutilts.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:login/commons/textstyle.dart';
-import 'package:login/models/analytical_ability_test_info.dart';
-
+import 'package:login/models/test_attempt_info.dart';
 import '../../../models/exam_sections_model.dart';
-
+import 'mock_test_instruction_screen.dart';
+final instructionslngview=InstructionFirstPage();
 class ExamStart extends StatefulWidget {
   const ExamStart({super.key});
 
@@ -15,6 +15,8 @@ class ExamStart extends StatefulWidget {
 
 class _ExamStartState extends State<ExamStart> {
   int index=0;
+  bool onohever=false;
+  bool ismouseohever =false;
   @override
   Widget build(BuildContext context) {
       //final double _width=MediaQuery.of(context).size.width;
@@ -25,7 +27,22 @@ class _ExamStartState extends State<ExamStart> {
         elevation: 0,
         centerTitle: false,
         backgroundColor:const Color.fromARGB(221, 99, 94, 94),
-        title:  const Text('I_cetMock Test',style: TextStyle(color:Colors.white,fontSize:15,),),),
+        title:  const Text('I_cetMock Test',style: TextStyle(color:Colors.white,fontSize:15,),),
+        actions: [
+          const CircleAvatar(radius:10,backgroundColor: Colors.green,child:Icon(Icons.description,color: Colors.white,size: 10,)),
+          TextButton(child: const Text('Question Paper',style: TextStyle(color: Colors.white,decoration:TextDecoration.underline),),
+            onPressed: (){
+            showDialog(context: context, builder: (BuildContext context)=>
+            Dialog( child:QuestionsDailugeBox()),);
+          }, ),
+          const Icon(Icons.info,color: Colors.blue,),
+          TextButton(child: const Text('Instructions',style: TextStyle(color: Colors.white,decoration:TextDecoration.underline),),
+          onPressed: (){
+            showDialog(context: context, builder: (BuildContext context)=>
+            Dialog( child:InstructionDailugeBox()),);
+                 },),
+        ],
+        ),
        body: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,13 +64,14 @@ class _ExamStartState extends State<ExamStart> {
                        crossAxisAlignment: CrossAxisAlignment.center,
                        children: [
                         Container(
+                          padding: const EdgeInsets.only(left: 10),
                           height: 25,
                           decoration:const BoxDecoration(color: Colors.blue,borderRadius:BorderRadius.all(Radius.circular(2))),
                           child:Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: const [
                                Text('I_cet Mock ',style: TextStyle(color: Colors.white,fontSize: 15),),
-                               Icon(Icons.info,color: Colors.white,size: 15,),]),),
+                               Icon(Icons.info,color: Colors.white,size: 20,),]),),
                          ClipPath(
                           clipper: TriangleClipper(),
                           child: Container(
@@ -95,6 +113,7 @@ class _ExamStartState extends State<ExamStart> {
                           const VerticalDivider(),
                          _sections(2),
                          const VerticalDivider(), ]),),
+                      ismouseohever?   SizedBox(height: 50,child:Text("Hello Uma Shankar")):SizedBox(),
                     const Icon(Icons.arrow_right,size: iconsize,color:Colors.black38,),], ),),
                     const Padding(
                      padding:EdgeInsets.only(top: 10,bottom: 10,left: 20),
@@ -123,10 +142,10 @@ class _ExamStartState extends State<ExamStart> {
                        GestureDetector(
                         onTap:(){},
                         child:Container(
-                          padding: const EdgeInsets.only(left:20,right:20),
+                          padding: const EdgeInsets.only(left:10,right:10),
                           height: 30,
-                          color: const Color.fromARGB(255, 16, 163, 236),
-                          child: const Center(child:Text('Submit',style:TextStyle(color: Colors.white,fontWeight: FontWeight.w800))),
+                          color: Colors.blue[800],
+                          child: const Center(child:Text('Save & Next',style:TextStyle(color: Colors.white,fontWeight: FontWeight.w800))),
                         )),
                         const SizedBox(width: 50,),
                       ],
@@ -153,13 +172,35 @@ class _ExamStartState extends State<ExamStart> {
            SizedBox(
             width:MediaQuery.of(context).size.width<1200?70:150,
             child: Text(sections[index].title,overflow:TextOverflow.ellipsis,)),
-           Icon(sections[index].icon,color: Colors.blue,)
+            //Icon(sections[index].icon,color: Colors.blue,),
+            InkWell(
+              onTap: (){},
+              child:MouseRegion(
+                onEnter: (_) {
+                 ismouseohever=true;
+                 setState(() {
+                   
+                 });
+                },
+                onExit: (_){
+                  ismouseohever=false; setState(() {
+                   
+                 });
+                },
+                child:
+                Icon(Icons.info,color:Colors.blue),
+                 ),
+            )
           ], ) ),
     );
   }
 }
 
+//  _instructionsDailugeBox(){
+// return 
+// }
 
+ 
 class ExamBody extends StatefulWidget {
   const ExamBody({super.key});
 
@@ -233,35 +274,34 @@ class OnOhoverCustomWidget extends StatefulWidget {
 }
 
 class _OnOhoverCustomWidgetState extends State<OnOhoverCustomWidget> {
-    int? onoheverButton;
-    var value=0;
+    bool onoheverButton=false;
   @override
   Widget build(BuildContext context) {
-   
     return InkWell(
       onTap: widget.onTap,
       child: MouseRegion(
         onEnter: (_) {
-          setState(() {
             setState(() {
-             onoheverButton=value;
+             onoheverButton=true;
                        });
-          });
         },
         onExit: (event) {
           setState(() {
-            onoheverButton=null;
+            onoheverButton=false;
           });
         },
+      
         child: Container(
           padding: const EdgeInsets.only(left:5,right: 5),
           height: 30,
           //width: 120,
-          decoration: BoxDecoration(color:onoheverButton!=null? Colors.blue:Colors.white,border: Border.all(color: Colors.black45)),
+          decoration: BoxDecoration(color:onoheverButton? Colors.blue:Colors.white,border: Border.all(color: Colors.black45),
+          boxShadow: [onoheverButton?BoxShadow(blurRadius: 1,):BoxShadow()],
+          ),
           child:Center(
                 child: Text(
                   widget.text,
-                  style:TextStyle(fontSize: 15.0,color: onoheverButton!=null?Colors.white:Colors.black),
+                  style:TextStyle(fontSize: 15.0,color: onoheverButton?Colors.white:Colors.black),
                 ),
               ),
         ),
@@ -307,7 +347,10 @@ class _LeftSideOptionsState extends State<LeftSideOptions> {
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                        AnalyticalAbilityTAInfo(),
+                        Container(
+                          color: Colors.red,
+                          
+                          child: AnalyticalAbilityTAInfo()),
                       ],),
                      
                     ),
@@ -319,7 +362,7 @@ class _LeftSideOptionsState extends State<LeftSideOptions> {
                     child:GestureDetector(
                         onTap:(){},
                         child:Container(
-                          padding: const EdgeInsets.only(left:20,right:20),
+                          padding: const EdgeInsets.only(left:10,right:10),
                           width: 90,
                           height: 30,
                           color: const Color.fromARGB(255, 16, 163, 236),
@@ -331,4 +374,60 @@ class _LeftSideOptionsState extends State<LeftSideOptions> {
              );
   }
 }
+class InstructionDailugeBox extends StatefulWidget {
+  const InstructionDailugeBox({super.key});
 
+  @override
+  State<InstructionDailugeBox> createState() => _InstructionDailugeBoxState();
+}
+
+class _InstructionDailugeBoxState extends State<InstructionDailugeBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+        padding: const EdgeInsets.only(left: 10,right: 10),
+        height: 30,
+        color: Colors.blue[800],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+         Text('Instructions',style: TextStyle(color: Colors.white),),
+         IconButton(onPressed: (){Navigator.of(context).pop();}, icon: Icon(Icons.close)),
+        ]),),
+        Row(children: [
+         
+        ],)
+    ],);
+  }
+}
+
+
+class QuestionsDailugeBox extends StatefulWidget {
+  const QuestionsDailugeBox({super.key});
+
+  @override
+  State<QuestionsDailugeBox> createState() => _QuestionsDailugeBoxState();
+}
+
+class _QuestionsDailugeBoxState extends State<QuestionsDailugeBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+        padding: const EdgeInsets.only(left: 10,right: 10),
+        height: 30,
+        color: Colors.blue[800],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Text('Question Paper',style: TextStyle(color: Colors.white),),
+          IconButton(onPressed: (){Navigator.of(context).pop();}, icon:Icon(Icons.close)),
+        ]),),
+        Row(children: [
+         
+        ],),
+        
+    ],);
+  }
+}

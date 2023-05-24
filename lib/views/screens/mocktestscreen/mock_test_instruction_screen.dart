@@ -62,38 +62,7 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
                     'Instructions',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),)),),
                   Padding(
        padding: const EdgeInsets.only(top: 8),
-       child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-          const Text('View in :',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-          Container(
-            width:90,
-            height: 30,
-             margin: const EdgeInsets.only(right:60,left: 10),
-             padding: const EdgeInsets.only(left:2,right: 2),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: DropdownButtonHideUnderline(
-              child:DropdownButton<String>(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                value: language.selectedLanguage,
-                onChanged: (newValue){
-                  language.setSelectionLanguage(newValue!);
-                },
-                  items: <String>['English','Telugu'].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                    alignment: Alignment.center,
-                    value: value,
-                    child: Row(
-                      children: [
-                       Text(value),
-                      ],),
-                  ); 
-                }).toList(),
-              ),
-            ),
-          ),
-        ],
-        ),
+       child: _examLngView(language),
         ), 
         Expanded(
           child: SingleChildScrollView(
@@ -148,8 +117,43 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
       ),
     );
   }
+  _examLngView(language) {
+   return Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+          const Text('View in :',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+          Container(
+            width:90,
+            height: 30,
+             margin: const EdgeInsets.only(right:60,left: 10),
+             padding: const EdgeInsets.only(left:2,right: 2),
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            child: DropdownButtonHideUnderline(
+              child:DropdownButton<String>(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                value: language.selectedLanguage,
+                onChanged: (newValue){
+                  language.setSelectionLanguage(newValue!);
+                },
+                  items: <String>['English','Telugu'].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                    alignment: Alignment.center,
+                    value: value,
+                    child: Row(
+                      children: [
+                       Text(value),
+                      ],),
+                  ); 
+                }).toList(),
+              ),
+            ),
+          ),
+        ],
+        );
+  }
+  
 }
-
+ 
 class InstructionsSecondPage extends StatefulWidget {
   const InstructionsSecondPage({super.key});
 
@@ -168,8 +172,8 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
   "English",
  ];
   var value=0;
-  int? onhoveredIndex;
-  int? testButtonOnohever;
+  bool onhoveredIndex=false;
+  bool testButtonOnohever=false;
   void _handleOptionsChaanged(String? newvalue){
   setState(() {
     dropdowndefaltValue=newvalue!;
@@ -286,23 +290,23 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                     child: MouseRegion(
                        onEnter: (_){
                         setState(() {
-                          onhoveredIndex=value;
+                          onhoveredIndex=true;
                         });
                        },
                        onExit: (_){
                         setState(() {
-                          onhoveredIndex=null;
+                          onhoveredIndex=false;
                         });
                        },
                     
                       child: Container(height: 30,width: 80,
                            margin: const EdgeInsets.only(left:70),                      
                            decoration: BoxDecoration(border: Border.all(color: Colors.black),
-                           color: onhoveredIndex != null?Colors.blue:null,),
+                           color: onhoveredIndex ?Colors.blue:null,),
                         child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                            children: [
-                             Icon(Icons.arrow_back_ios_rounded,size: 15,color: onhoveredIndex!=null?Colors.white:Colors.black,),
-                             Text("Previous",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15,color:onhoveredIndex!=null?Colors.white:Colors.black))],)),
+                             Icon(Icons.arrow_back_ios_rounded,size: 15,color: onhoveredIndex?Colors.white:Colors.black,),
+                             Text("Previous",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15,color:onhoveredIndex?Colors.white:Colors.black))],)),
                     ),),
             
                   InkWell(
@@ -316,24 +320,24 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                     child: MouseRegion(
                       onEnter: (_){
                        setState(() {
-                        testButtonOnohever=value;
+                        testButtonOnohever=true;
                        });
                       },
                       onExit: (event) {
                         setState(() {
-                          testButtonOnohever=null;
+                          testButtonOnohever=false;
                         });
                       },
                       child: Container(height: 30,
                            margin: const EdgeInsets.only(right: 70),
-                           decoration: BoxDecoration(border: Border.all(color: Colors.black),color: testButtonOnohever != null?Colors.blue:Colors.blue[200],
+                           decoration: BoxDecoration(border: Border.all(color: Colors.black),color: testButtonOnohever?Colors.blue:Colors.blue[200],
                            
                            ),
                         child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                            children: [
                              Padding(
                                padding: const EdgeInsets.all(5),
-                               child: Center(child: Text("I am ready to begin",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color:testButtonOnohever!=null? Colors.white:Colors.black),))),
+                               child: Center(child: Text("I am ready to begin",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color:testButtonOnohever? Colors.white:Colors.black),))),
                          ])),
                     )),
                 //   OnOhoverCustomWidget( 
