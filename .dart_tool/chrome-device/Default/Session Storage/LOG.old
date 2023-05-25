@@ -1,14 +1,18 @@
-2023/05/24-11:50:56.653 2b03 Reusing MANIFEST /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.xzNOLw/flutter_tools_chrome_device.a45p3P/Default/Session Storage/MANIFEST-000001
-2023/05/24-11:50:56.654 2b03 Recovering log #7
-2023/05/24-11:50:56.657 2b03 Reusing old log /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.xzNOLw/flutter_tools_chrome_device.a45p3P/Default/Session Storage/000007.log 
-2023/05/24-11:50:56.658 2b03 Delete type=0 #4
-2023/05/24-11:50:56.658 2b03 Delete type=0 #3
-2023/05/24-11:57:15.023 4e03 Level-0 table #11: started
-2023/05/24-11:57:15.035 4e03 Level-0 table #11: 16308 bytes OK
-2023/05/24-11:57:15.045 4e03 Delete type=0 #7
-2023/05/24-11:59:03.327 4e03 Level-0 table #13: started
-2023/05/24-11:59:03.720 4e03 Level-0 table #13: 14635 bytes OK
-2023/05/24-11:59:04.107 4e03 Delete type=0 #10
-2023/05/24-12:25:53.689 4e03 Level-0 table #15: started
-2023/05/24-12:25:58.212 4e03 Level-0 table #15: 22244 bytes OK
-2023/05/24-12:26:03.294 4e03 Delete type=0 #12
+2023/05/25-11:16:01.484 2c03 Reusing MANIFEST /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.mRNnR4/flutter_tools_chrome_device.u5Cq5o/Default/Session Storage/MANIFEST-000001
+2023/05/25-11:16:01.486 2c03 Recovering log #14
+2023/05/25-11:16:01.491 2c03 Reusing old log /private/var/folders/k2/6c4cvylj60sc3p_rl8b2jl6r0000gn/T/flutter_tools.mRNnR4/flutter_tools_chrome_device.u5Cq5o/Default/Session Storage/000014.log 
+2023/05/25-11:16:01.494 2c03 Delete type=0 #7
+2023/05/25-11:16:01.495 2c03 Delete type=0 #4
+2023/05/25-11:16:01.495 2c03 Delete type=0 #3
+2023/05/25-12:43:17.989 3003 Level-0 table #18: started
+2023/05/25-12:43:21.539 3003 Level-0 table #18: 16573 bytes OK
+2023/05/25-12:43:21.565 3003 Delete type=0 #14
+2023/05/25-12:43:21.574 3003 Compacting 4@0 + 1@1 files
+2023/05/25-12:43:21.587 3003 Generated table #19@0: 517 keys, 12653 bytes
+2023/05/25-12:43:21.587 3003 Compacted 4@0 + 1@1 files => 12653 bytes
+2023/05/25-12:43:21.595 3003 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/05/25-12:43:21.598 3003 Delete type=2 #15
+2023/05/25-12:43:21.598 3003 Delete type=2 #13
+2023/05/25-12:43:21.598 3003 Delete type=2 #11
+2023/05/25-12:43:21.599 3003 Delete type=2 #8
+2023/05/25-12:43:21.599 3003 Delete type=2 #18

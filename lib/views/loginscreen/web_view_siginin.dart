@@ -1,19 +1,21 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:login/views/screens/home.dart';
+import 'package:login/views/loginscreen/web_view_siginup.dart';
 import 'package:login/views/widgets/appbar.dart';
 
-import 'siginin.dart';
+import '../screens/mocktestscreen/exam_screen.dart';
 
-class SingnUp extends StatefulWidget {
-  const SingnUp({super.key});
+class WebViewSiginIn extends StatefulWidget {
+  const WebViewSiginIn({super.key});
 
   @override
-  State<SingnUp> createState() => _SingnUpState();
+  State<WebViewSiginIn> createState() => _WebViewSiginInState();
 }
 
-class _SingnUpState extends State<SingnUp> {
+class _WebViewSiginInState extends State<WebViewSiginIn> {
   final _formKey = GlobalKey<FormState>();
-  late String name, email, password;
+  late String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,35 +32,23 @@ class _SingnUpState extends State<SingnUp> {
             children: [
               const Spacer(),
               TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Name",
+                 key: const ValueKey('EnterEmail'),
+                 decoration: const InputDecoration(
+                 hintText: "Email",
                 ),
-                validator: (val) {
-                  return val!.isEmpty ? "Enter Name" : null;
-                },
-                onChanged: (value) {
+                // validator: (val) {
+                //   return val!.isEmpty ? "Enter Email id" : null;
+                // },
+                  onChanged: (value) {
                   email = value;
                 },
               ),
-              const SizedBox(
+               const SizedBox(
                 height: 6,
               ),
               TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                ),
-                validator: (val) {
-                  return val!.isEmpty ? "Enter Email id" : null;
-                },
-                onChanged: (value) {
-                  name = value;
-                },
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
+                    key: const ValueKey('EnterPassword'),
+                decoration:  const InputDecoration(
                   hintText: "Password",
                 ),
                 validator: (val) {
@@ -72,7 +62,11 @@ class _SingnUpState extends State<SingnUp> {
                 height: 24,
               ),
               GestureDetector(
-                onTap: () {},
+                  key: const ValueKey('button'),
+                onTap: () {
+               Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => ExamStart()));//Home
+                },
                 child: Container(
                   height: 50,
                   alignment: Alignment.center,
@@ -82,7 +76,7 @@ class _SingnUpState extends State<SingnUp> {
                       color: Colors.blue,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: const Text(
-                    "SiginUp",
+                    "Sigin in",
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
@@ -94,18 +88,15 @@ class _SingnUpState extends State<SingnUp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "already have an account?",
+                    "Don't have any account?",
                     style: TextStyle(fontSize: 16),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => SiginIn()));
+                   onTap: () {
+                   Navigator.pushReplacement(context,
+                   MaterialPageRoute(builder: (context) => WebViewSingnUp()));
                     },
-                    child: const Text(
-                      "SingnIn",
-                      style: TextStyle(
-                          fontSize: 16, decoration: TextDecoration.underline),
+                    child: const Text( "SingnUp", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
                     ),
                   ),
                 ],
@@ -113,6 +104,7 @@ class _SingnUpState extends State<SingnUp> {
               const SizedBox(
                 height: 80,
               ),
+              
             ],
           ),
         ),
@@ -120,3 +112,8 @@ class _SingnUpState extends State<SingnUp> {
     );
   }
 }
+
+
+
+
+

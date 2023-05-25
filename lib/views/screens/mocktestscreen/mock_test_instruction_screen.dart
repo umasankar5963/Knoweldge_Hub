@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:login/views/screens/mocktestscreen/exam_screen.dart';
 import 'package:provider/provider.dart';
@@ -8,11 +7,9 @@ class  InstructionsLanguage extends ChangeNotifier{
    String _selectedLanguage ='English';
    String  _imagePathScreen1="assets/examInstructions/instructions1.png"; 
    String  _imagePathScreen2='assets/examInstructions/instructions3.png';  
-String get selectedLanguage =>_selectedLanguage;
-  
+   String get selectedLanguage =>_selectedLanguage;
   
   void setSelectionLanguage(String language){
-    
    _selectedLanguage=language;
        if (language == 'English') {
       _imagePathScreen1 = 'assets/examInstructions/instructions1.png';
@@ -30,20 +27,16 @@ String get selectedLanguage =>_selectedLanguage;
 
 class InstructionFirstPage extends StatefulWidget {
   const InstructionFirstPage({super.key});
-
   @override
   State<InstructionFirstPage> createState() => _InstructionFirstPageState();
 }
 class _InstructionFirstPageState extends State<InstructionFirstPage> {
-  int value=0;
-  int? hoveredIndex;
  
   @override
   Widget build(BuildContext context) {
       final language = Provider.of<InstructionsLanguage>(context);
       double height=MediaQuery.of(context).size.height;
       double width=MediaQuery.of(context).size.width;
-     
     return Scaffold(
       backgroundColor: Colors.indigo[900],
      body:Container(
@@ -58,12 +51,10 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
             child:const Padding(
                   padding: EdgeInsets.only(left:20),
                   child: Text(
-                    
                     'Instructions',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),)),),
-                  Padding(
-       padding: const EdgeInsets.only(top: 8),
-       child: _examLngView(language),
-        ), 
+            Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: _examLngView(language),), 
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -83,40 +74,23 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
           ),
         ), 
                 
-                  const Divider(thickness: 0.5,),
+           const Divider(thickness: 0.5,),
            SizedBox(
                  height: 70,
                  width: width,
             child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-              GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>InstructionsSecondPage()));},
-                child: MouseRegion(
-                 onEnter: (_) {
-                      setState(() {
-                        hoveredIndex=value;
-                      });
-                    },
-                    onExit: (_) {
-                      setState(() {
-                        hoveredIndex=null;
-                      });
-                    },
-                  child: Container(height: 30,width: 80,
-                      margin: const EdgeInsets.only(right: 70),
-                      decoration: BoxDecoration(
-                          color: hoveredIndex == value ? Colors.blue : null,
-                        border: Border.all(color: Colors.black,)),
-                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [Text("Next",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: hoveredIndex!=null?Colors.white:Colors.black),), Icon(Icons.arrow_forward_ios_rounded,size: 15,color: hoveredIndex!=null?Colors.white:Colors.black,),],),),
-                ),
-           ),],),
+                    OnOheverButtons(nexticondata: Icons.arrow_forward_ios_rounded,text: 'Next',ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>InstructionsSecondPage()));},),
+                  ],),
            ),
           ],),
       ),
     );
   }
+  }
+  
+   
   _examLngView(language) {
    return Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -152,7 +126,7 @@ class _InstructionFirstPageState extends State<InstructionFirstPage> {
         );
   }
   
-}
+
  
 class InstructionsSecondPage extends StatefulWidget {
   const InstructionsSecondPage({super.key});
@@ -204,40 +178,16 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                 child:const Padding(
                   padding: EdgeInsets.only(left:20),
                   child: Text('Other Important Instructions',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),),
-             Padding(
-                    padding: const EdgeInsets.only(top: 8),
-               child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                     const Text('View in :',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                 Container(
-                     width:90,
-                     height: 30,
-                     margin: const EdgeInsets.only(right:60,left: 10),
-                     padding: const EdgeInsets.only(left:2,right: 2),
-                     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: DropdownButtonHideUnderline(
-                     child:DropdownButton<String>(
-                       isDense: true,
-                       borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        value: language.selectedLanguage,
-                         onChanged: (newValue){
-                          language.setSelectionLanguage(newValue!);},
-                       items:<String>['English','Telugu'].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                         alignment: Alignment.center,
-                         value: value,
-                         child: Text(value),
-                  ); 
-                }).toList(),
-                 ),),),],),),
+              Padding(padding: const EdgeInsets.only(top: 8),
+               //view type
+               child:_examLngView(language),),
                  //instructions
                  Expanded(
                   child: SingleChildScrollView(
                    child: SizedBox(
                     width:MediaQuery.of(context).size.width,
                     child: Image.asset(language._imagePathScreen2)))),  
-                  const Divider(thickness: 0.5,),
+                const Divider(thickness: 0.5,),
           SingleChildScrollView(
             padding: const EdgeInsets.only(left:10,right: 5),
             child: Column(
@@ -260,7 +210,8 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                        children: [
                          Text(language),],),),);
                }).toList(),     
-                )],),
+                )
+                ],),
             
                const Text('Please note all questions will appear in your default language can be change on particular question later on ',style: TextStyle(color:Colors.red),),
                const Padding(padding: EdgeInsets.only(top: 20)),
@@ -271,10 +222,10 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                    setState(() {
                      select=value!;
                      if(value){
-                     // alertText='Please accept terms and conditions before proceedings';
+                      testButtonOnohever=true;
                        alertText='Please select default language to proceed further';
                      }else{
-                       //alertText='Please select default language to proceed further';
+                      testButtonOnohever=false;
                       alertText='Please accept terms and conditions before proceedings';
                      }
                    });  
@@ -285,30 +236,7 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                 Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        children: [
-                   InkWell(
-                         onTap: (){Navigator.pop(context,);},
-                    child: MouseRegion(
-                       onEnter: (_){
-                        setState(() {
-                          onhoveredIndex=true;
-                        });
-                       },
-                       onExit: (_){
-                        setState(() {
-                          onhoveredIndex=false;
-                        });
-                       },
-                    
-                      child: Container(height: 30,width: 80,
-                           margin: const EdgeInsets.only(left:70),                      
-                           decoration: BoxDecoration(border: Border.all(color: Colors.black),
-                           color: onhoveredIndex ?Colors.blue:null,),
-                        child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                           children: [
-                             Icon(Icons.arrow_back_ios_rounded,size: 15,color: onhoveredIndex?Colors.white:Colors.black,),
-                             Text("Previous",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15,color:onhoveredIndex?Colors.white:Colors.black))],)),
-                    ),),
-            
+                     OnOheverButtons(text: 'Previous', previousicondata: Icons.arrow_back_ios_rounded,ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>InstructionFirstPage()));},),
                   InkWell(
                       onTap: (){
                        if (dropdowndefaltValue!= null && select) {
@@ -340,17 +268,6 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
                                child: Center(child: Text("I am ready to begin",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color:testButtonOnohever? Colors.white:Colors.black),))),
                          ])),
                     )),
-                //   OnOhoverCustomWidget( 
-                //   onTap: (){
-                //        if (dropdowndefaltValue!= null && select) {
-                //    _navigateToNextPage();
-                //    } else {
-                //    alertdailugeBox(context);
-                //    }
-                //       },
-                //  text: "I am ready to begin",
-                //  style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 10,color: Colors.white)),
-
                    const SizedBox(),
                       ],), 
                 const SizedBox(height: 40,)
@@ -401,7 +318,6 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
             Expanded(
               child: Container(
                 decoration:  BoxDecoration( color:Colors.red[50],borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))),
-               
                 child: Center(child:TextButton(onPressed: (){Navigator.pop(context,);},
                 style: ButtonStyle(
                   backgroundColor:MaterialStateProperty.all(const Color.fromARGB(255, 85, 153, 87))), child:  const Text("Ok",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),))),
@@ -417,3 +333,56 @@ class _InstructionsSecondPageState extends State<InstructionsSecondPage> {
 }
 
 
+class OnOheverButtons extends StatefulWidget {
+ const OnOheverButtons({super.key, required this.text,  this.nexticondata,  this.previousicondata, required this.ontap,});
+  final String text;
+  final IconData? nexticondata;
+  final IconData? previousicondata;
+  final VoidCallback ontap;
+  @override
+  State<OnOheverButtons> createState() => _OnOheverButtonsState();
+}
+
+class _OnOheverButtonsState extends State<OnOheverButtons> {
+   int value=0;
+   bool hoveredIndex=false; 
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+                    onTap: widget.ontap,
+                child: MouseRegion(
+                 onEnter: (_) {
+                      setState(() {
+                        hoveredIndex=true;
+                      });
+                    },
+                    onExit: (_) {
+                      setState(() {
+                        hoveredIndex=false;
+                      });
+                    },
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 5,right:5),
+                    height: 30,
+                      margin: const EdgeInsets.only(right: 70),
+                      decoration: BoxDecoration(
+                       color: hoveredIndex? Colors.blue : Colors.white,
+                       border: Border.all(color: Colors.black,),
+                       boxShadow: [hoveredIndex?BoxShadow(blurRadius: 1,):BoxShadow(blurRadius: 0)],),
+                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(widget.previousicondata,
+                     size: 15,
+                     color: hoveredIndex?Colors.white:Colors.black,),
+                      Text(widget.text,
+                      style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: hoveredIndex?Colors.white:Colors.black),),
+                     Icon(widget.nexticondata,
+                     size: 15,
+                     color: hoveredIndex?Colors.white:Colors.black,),],),),
+                ),
+           );
+  }
+}

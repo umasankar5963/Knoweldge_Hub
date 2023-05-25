@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login/views/loginscreen/siginin.dart';
+import 'package:login/views/loginscreen/web_view_siginin.dart';
 import 'package:login/views/screens/mocktestscreen/mock_test_instruction_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'views/loginscreen/responsivesigninui.dart';
 
 void main() {
   runApp(
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
      title: 'Flutter Demo',
-      home: SiginIn(),
+      home: ResponsiveLoginUi(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,11 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:login/commons/colorutilts.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:login/commons/textstyle.dart';
-import 'package:login/models/test_attempt_info.dart';
 import '../../../models/exam_sections_model.dart';
 import 'mock_test_instruction_screen.dart';
-final instructionslngview=InstructionFirstPage();
+
 class ExamStart extends StatefulWidget {
   const ExamStart({super.key});
 
@@ -17,12 +18,53 @@ class _ExamStartState extends State<ExamStart> {
   int index=0;
   bool onohever=false;
   bool ismouseohever =false;
+  Duration _duration = Duration(minutes: 150, seconds: 60);
+  Timer ?_timer;
+  String _displayTime = '';
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_duration.inSeconds > 0) {
+          _duration -= Duration(seconds: 1);
+          _displayTime = formatDuration(_duration);
+        } else {
+          _timer!.cancel();
+          _displayTime = 'Time up!';
+        }
+      });
+    });
+  }
+
+  String formatDuration(Duration duration) {
+    String twoDigits(int n) {
+      if (n >= 10) return '$n';
+      return '0$n';
+    }
+
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return '${duration.inHours}:$twoDigitMinutes:$twoDigitSeconds';
+  }
   @override
   Widget build(BuildContext context) {
       //final double _width=MediaQuery.of(context).size.width;
-     const double iconsize=40;
+    const double iconsize=40;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 30,
         elevation: 0,
         centerTitle: false,
@@ -71,7 +113,7 @@ class _ExamStartState extends State<ExamStart> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: const [
                                Text('I_cet Mock ',style: TextStyle(color: Colors.white,fontSize: 15),),
-                               Icon(Icons.info,color: Colors.white,size: 20,),]),),
+                               InkWell(child: Icon(Icons.info,color: Colors.white,size: 20,)),]),),
                          ClipPath(
                           clipper: TriangleClipper(),
                           child: Container(
@@ -89,11 +131,12 @@ class _ExamStartState extends State<ExamStart> {
                    SizedBox(
                     height: 27,
                        child: Row(
-                         children: const [
+                         children:  [
                          SizedBox(width: 20),
                          Text('Section'),
                          Spacer(),
                          Text('Time Left :',style: TextStyle(fontSize: 15),),
+                         Text(_displayTime,style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),),
                          SizedBox(width: 20),
                        ],),),
                   Container(
@@ -113,8 +156,9 @@ class _ExamStartState extends State<ExamStart> {
                           const VerticalDivider(),
                          _sections(2),
                          const VerticalDivider(), ]),),
-                      ismouseohever?   SizedBox(height: 50,child:Text("Hello Uma Shankar")):SizedBox(),
-                    const Icon(Icons.arrow_right,size: iconsize,color:Colors.black38,),], ),),
+                       ismouseohever?SizedBox(height: 50,child:Text("Hello Uma Shankar")):SizedBox(),
+                       const Icon(Icons.arrow_right,size: iconsize,color:Colors.black38,),], ),),
+                  
                     const Padding(
                      padding:EdgeInsets.only(top: 10,bottom: 10,left: 20),
                      child: Text('Question Type :MCQ',style: TextStyle(fontWeight: FontWeight.w800),),),
@@ -135,9 +179,9 @@ class _ExamStartState extends State<ExamStart> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                        const SizedBox(width:50),
-                       OnOhoverCustomWidget(text: 'Mark for Review & Next', onTap: (){},),
+                       OnOheverButtons(text: 'Mark for Review & Next', ontap: () {  },),
                        const SizedBox(width:10),
-                       OnOhoverCustomWidget(text: 'Clear Response', onTap: (){},),
+                       OnOheverButtons(text: 'Clear Response',  ontap: () {  },),
                        const Spacer(),
                        GestureDetector(
                         onTap:(){},
@@ -179,12 +223,10 @@ class _ExamStartState extends State<ExamStart> {
                 onEnter: (_) {
                  ismouseohever=true;
                  setState(() {
-                   
                  });
                 },
                 onExit: (_){
                   ismouseohever=false; setState(() {
-                   
                  });
                 },
                 child:
@@ -195,15 +237,9 @@ class _ExamStartState extends State<ExamStart> {
     );
   }
 }
-
-//  _instructionsDailugeBox(){
-// return 
-// }
-
  
 class ExamBody extends StatefulWidget {
   const ExamBody({super.key});
-
   @override
   State<ExamBody> createState() => _ExamBodyState();
 }
@@ -234,82 +270,10 @@ class _ExamBodyState extends State<ExamBody> {
                           radius: 18,
                           child:Icon(Icons.arrow_downward_rounded,color:Colors.white)),
                       ), ],) ),
-                    //  Row(
-                    //   children: [
-                    //     Expanded(
-                    //       child: Container(
-                    //         height: 500,
-                    //         width: 500,
-                    //         decoration: BoxDecoration(border: Border.all(color: Colors.black45)),
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       decoration: BoxDecoration(border: Border.all(color: Colors.black45)),
-                    //       width: 20,
-                    //       //height: double.maxFinite,
-                    //       child:   Scrollbar(
-                    //       thumbVisibility: true,
-                    //       trackVisibility: true,
-                    //       radius: Radius.circular(5),
-                    //       interactive: true,
-                    //       child:Container(),
-                    //     ),),
-                    //   ],
-                    //  )
-
                ],)
             );
   }
 }
-
-
-class OnOhoverCustomWidget extends StatefulWidget {
-  final String text;
-  final VoidCallback onTap;
-
-  OnOhoverCustomWidget({required this.text, required this.onTap,});
-
-  @override
-  State<OnOhoverCustomWidget> createState() => _OnOhoverCustomWidgetState();
-}
-
-class _OnOhoverCustomWidgetState extends State<OnOhoverCustomWidget> {
-    bool onoheverButton=false;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: widget.onTap,
-      child: MouseRegion(
-        onEnter: (_) {
-            setState(() {
-             onoheverButton=true;
-                       });
-        },
-        onExit: (event) {
-          setState(() {
-            onoheverButton=false;
-          });
-        },
-      
-        child: Container(
-          padding: const EdgeInsets.only(left:5,right: 5),
-          height: 30,
-          //width: 120,
-          decoration: BoxDecoration(color:onoheverButton? Colors.blue:Colors.white,border: Border.all(color: Colors.black45),
-          boxShadow: [onoheverButton?BoxShadow(blurRadius: 1,):BoxShadow()],
-          ),
-          child:Center(
-                child: Text(
-                  widget.text,
-                  style:TextStyle(fontSize: 15.0,color: onoheverButton?Colors.white:Colors.black),
-                ),
-              ),
-        ),
-      ),
-    );
-  }
-}
-
 
 
 
@@ -347,12 +311,11 @@ class _LeftSideOptionsState extends State<LeftSideOptions> {
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                        Container(
-                          color: Colors.red,
+                        // Container(
+                        //   color: Colors.red,
                           
-                          child: AnalyticalAbilityTAInfo()),
+                        //   child: AnalyticalAbilityTAInfo()),
                       ],),
-                     
                     ),
                   ),
                   Container(
@@ -370,7 +333,6 @@ class _LeftSideOptionsState extends State<LeftSideOptions> {
                         )),),),
                     Container(height: 15,color:Colors.blueGrey[400],)
               ],)
-              
              );
   }
 }
@@ -396,8 +358,25 @@ class _InstructionDailugeBoxState extends State<InstructionDailugeBox> {
          IconButton(onPressed: (){Navigator.of(context).pop();}, icon: Icon(Icons.close)),
         ]),),
         Row(children: [
-         
-        ],)
+        
+        ],),
+         Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SizedBox(
+                width:MediaQuery.of(context).size.width,
+                child:Column(
+                 children:[
+                  Image.asset('assets/examInstructions/instructions1.png'),
+                  Image.asset('assets/examInstructions/instructions2.png'),
+                  Image.asset('assets/examInstructions/instructions3.png'),
+                ]),
+              ),
+            ),
+          ),
+        ), 
     ],);
   }
 }
@@ -421,13 +400,14 @@ class _QuestionsDailugeBoxState extends State<QuestionsDailugeBox> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text('Question Paper',style: TextStyle(color: Colors.white),),
-          IconButton(onPressed: (){Navigator.of(context).pop();}, icon:Icon(Icons.close)),
+          const Text('Question Paper',style: TextStyle(color: Colors.white),),
+          IconButton(
+            padding: EdgeInsets.only(bottom: 5),
+            onPressed: (){Navigator.of(context).pop();}, icon:Icon(Icons.close)),
         ]),),
         Row(children: [
          
         ],),
-        
     ],);
   }
 }
