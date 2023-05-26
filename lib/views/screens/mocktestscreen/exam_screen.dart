@@ -18,45 +18,39 @@ class _ExamStartState extends State<ExamStart> {
   int index=0;
   bool onohever=false;
   bool ismouseohever =false;
-  Duration _duration = Duration(minutes: 150, seconds: 60);
-  Timer ?_timer;
-  String _displayTime = '';
+ Timer? _timer;
+  int _duration = 150; // 150 minutes
+  int _remainingSeconds = 0;
 
   @override
   void initState() {
-    startTimer();
     super.initState();
+    _startTimer();
   }
 
   @override
   void dispose() {
-    _timer!.cancel();
+    _timer?.cancel();
     super.dispose();
   }
+  void _startTimer() {
+    _remainingSeconds = _duration * 60;
 
-  void startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_duration.inSeconds > 0) {
-          _duration -= Duration(seconds: 1);
-          _displayTime = formatDuration(_duration);
-        } else {
-          _timer!.cancel();
-          _displayTime = 'Time up!';
-        }
-      });
+      if (_remainingSeconds > 0) {
+        setState(() {
+          _remainingSeconds--;
+        });
+      } else {
+        _timer?.cancel();
+      }
     });
   }
 
-  String formatDuration(Duration duration) {
-    String twoDigits(int n) {
-      if (n >= 10) return '$n';
-      return '0$n';
-    }
-
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return '${duration.inHours}:$twoDigitMinutes:$twoDigitSeconds';
+  String _formatTime() {
+    final minutes = (_remainingSeconds ~/ 60).toString().padLeft(2, '0');
+    final seconds = (_remainingSeconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
   @override
   Widget build(BuildContext context) {
@@ -136,7 +130,7 @@ class _ExamStartState extends State<ExamStart> {
                          Text('Section'),
                          Spacer(),
                          Text('Time Left :',style: TextStyle(fontSize: 15),),
-                         Text(_displayTime,style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),),
+                         Text(   _formatTime(),style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),),
                          SizedBox(width: 20),
                        ],),),
                   Container(
